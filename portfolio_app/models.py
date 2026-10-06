@@ -17,6 +17,7 @@ class Student(models.Model):
     name = models.CharField(max_length=200)
     email = models.EmailField("MSU Email")
     major = models.CharField(max_length=200, choices=MAJOR, blank=True)
+#comment thats so important
 
     def __str__(self):
         return self.name
