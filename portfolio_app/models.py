@@ -21,3 +21,28 @@ class Student(models.Model):
 
     def __str__(self):
         return self.name
+
+class Portfolio(models.Model):
+    student = models.OneToOneField(Student, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    contact_email = models.EmailField("Contact Email")
+    is_active = models.BooleanField(default=True)
+    about = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return "/portfolio/%d/" % self.id #??
+
+class Project(models.Model):
+    portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=False)
+   
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return "/portfolio/%d/" % self.portfolio.id
