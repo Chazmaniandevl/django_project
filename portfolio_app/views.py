@@ -1,8 +1,15 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Portfolio
+
 
 def index(request):
-    return HttpResponse("Portfolio Home Page")
+    active_portfolios = Portfolio.objects.filter(
+     is_active=True
+   )
 
-def index(request):
-    return render(request,'portfolio_app/index.html')
+
+    return render(
+         request,
+        'portfolio_app/index.html',
+        {'active_portfolios':active_portfolios}
+   )
