@@ -4,8 +4,12 @@
 
 <h2> welcome to our portfolio Application</h2>
 
-<p>
-    Explore student portfolios and projects.
-</p>
+<ul>
+    {% for portfolio in active_portfolios %}
+        <li>{{portfolio.title}}</li>
+    {% empty %}
+        <li>No Active Portfolios Found</li>
+    {% endfor %}
+</ul>
 
 {% endblock %}
