@@ -1,12 +1,13 @@
 {% extends "portfolio_app/base_template.html" %}
 <!--Index page uses base format and fills block-->
 {% block content %}
- <a href="{% url 'index' %}">Home</a>
+ 
 <h2> welcome to our portfolio Application</h2>
 
 <ul>
     {% for portfolio in active_portfolios %}
-        <li>{{portfolio.title}}</li>
+        <li><a href="{% url 'portfolio_desc' portfolio.title %}">{{portfolio.title}}</a></li>
+        
     {% empty %}
         <li>No Active Portfolios Found</li>
     {% endfor %}
