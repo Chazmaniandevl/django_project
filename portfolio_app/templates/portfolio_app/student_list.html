@@ -1,0 +1,15 @@
+{% extends "portfolio_app/base_template.html" %}
+
+{%block content%}
+
+<ul>
+    {% for student in students %}
+        <li> {{student.name}} </li>
+
+    {% empty %}
+        <li> nothing!</li>
+    {% endfor %}
+
+</ul>
+
+{% endblock %}

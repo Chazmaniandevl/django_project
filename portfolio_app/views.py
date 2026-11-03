@@ -1,8 +1,14 @@
 from django.shortcuts import render
-from .models import Portfolio, Project
+from django.views.generic import ListView
+from .models import Portfolio, Project, Student
 
 def intro(request):
     return render(request, 'portfolio_app/intro.html')
+
+class StudentListView(ListView):
+    model = Student
+    template_name = 'portfolio_app/student_list.html'
+    context_object_name = 'students'
 
 def index(request):
     active_portfolios = Portfolio.objects.filter(

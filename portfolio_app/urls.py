@@ -6,4 +6,5 @@ urlpatterns = [
     path('home/', views.intro, name='intro'),
     path('index/', views.index, name='index'),
     path('portfolio/<str:titled>', views.portfolio_desc, name='portfolio_desc'),
+    path('students/', views.StudentListView.as_view(), name='student-list'),
 ]
