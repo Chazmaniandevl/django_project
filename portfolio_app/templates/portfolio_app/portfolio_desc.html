@@ -3,12 +3,12 @@
 {% block content %}
 
      <h2>  {{current_portfolio.title}}  </h2>
-   
-     <p>{{current_portfolio.student}}, {{current_portfolio.student.major}}</p>
 
      <p>{{current_portfolio.about}}</p>
 
     <h3>Projects: </h3>
+    
+    
     <ul>
     {% for project in projects %}
         <li><p>{{project.title}} : {{project.description}}</p></li>

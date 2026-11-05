@@ -4,7 +4,7 @@
 
 <ul>
     {% for student in students %}
-        <li> {{student.name}} </li>
+        <li> <a href="{% url 'student_detail' student.pk %}">  {{student.pk}} , {{student.name}} </a> </li>
 
     {% empty %}
         <li> nothing!</li>

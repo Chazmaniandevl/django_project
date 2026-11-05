@@ -6,7 +6,7 @@
 
 <ul>
     {% for portfolio in active_portfolios %}
-        <li><a href="{% url 'portfolio_desc' portfolio.title %}">{{portfolio.title}}</a></li>
+        <li><a href="{% url 'portfolio_desc' portfolio.pk %}">{{portfolio.title}}</a></li>
         
     {% empty %}
         <li>No Active Portfolios Found</li>
