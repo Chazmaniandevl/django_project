@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import Portfolio, Project, Student
+from django.urls import reverse_lazy
 
 #render for homepage
 def intro(request):
@@ -29,8 +30,32 @@ class StudentDetailView(DetailView):
     template_name = 'portfolio_app/student_detail.html'
     context_object_name = 'student'
 
+class StudentCreateView(CreateView):
+    model = Student
+    fields = ['name', 'email', 'major']
+    template_name = 'portfolio_app/student_form.html'
+    success_url = reverse_lazy('student_list')
+
+class StudentUpdateView(UpdateView):
+    model = Student
+    fields = ['name','email','major']
+    template_name_suffix = "_update_form"
+    success_url = reverse_lazy('student_list')
 
 
+# class PortfolioDetailView(DetailView):
+    # model = Portfolio
+    # template_name = 'portfolio_app/portfolio_desc.html'
+    # context_object_name = 'current_portfolio'
+    # queryset = Project.objects.all()
+    
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['projects'] = Project.objects.filter(portfolio__title=self)
+    #     return context
+
+
+    
 def portfolio_desc( request : int, pk):
     current_portfolio = Portfolio.objects.get(
       id = pk
@@ -48,3 +73,9 @@ def portfolio_desc( request : int, pk):
           ,'projects':projects
           },
     )
+
+class PortfolioCreateView(CreateView):
+    model = Portfolio
+    fields = ['title','contact_email','about']
+    template_name = 'portfolio_app/portfolio_form.html'
+    success_url = reverse_lazy('index')

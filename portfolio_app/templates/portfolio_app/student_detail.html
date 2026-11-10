@@ -10,6 +10,10 @@
 
     <p>{{student.get_major_display}}</p>
 
+    {%if student.portfolio %}
     <p><a href="{% url 'portfolio_desc' student.portfolio.pk %}">{{student.portfolio.title}}</a></p>
    <p>{{portfolio.name}}</p>
+   {% else %} <p> No portfolio</p>
+   {% endif %}
+   <a href="{% url 'student-update' student.pk %}">Update Student </a>
 {% endblock %}

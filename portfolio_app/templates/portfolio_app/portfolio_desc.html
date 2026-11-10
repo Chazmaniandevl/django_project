@@ -2,7 +2,7 @@
 
 {% block content %}
 
-     <h2>  {{current_portfolio.title}}  </h2>
+     <h2>  {{current_portfolio.portfolio.title}}  </h2>
 
      <p>{{current_portfolio.about}}</p>
 
@@ -10,7 +10,7 @@
     
     
     <ul>
-    {% for project in projects %}
+    {% for project in current_portfolio %}
         <li><p>{{project.title}} : {{project.description}}</p></li>
         
     {% empty %}
