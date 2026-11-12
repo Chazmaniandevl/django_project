@@ -22,6 +22,8 @@ class Student(models.Model):
     def __str__(self):
         return self.name
 
+
+
 class Portfolio(models.Model):
     student = models.OneToOneField(Student, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
@@ -34,6 +36,7 @@ class Portfolio(models.Model):
 
     def get_absolute_url(self):
         return "/portfolio/%d/" % self.id #??
+    
 
 class Project(models.Model):
     portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE)
@@ -46,3 +49,5 @@ class Project(models.Model):
 
     def get_absolute_url(self):
         return "/portfolio/%d/" % self.portfolio.id
+
+
