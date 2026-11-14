@@ -13,7 +13,8 @@
     {%if student.portfolio %}
     <p><a href="{% url 'portfolio_desc' student.portfolio.pk %}">{{student.portfolio.title}}</a></p>
    <p>{{portfolio.name}}</p>
-   {% else %} <p> No portfolio</p>
+   {% else %}
+    <p><a href="{% url 'portfolio-create' student.pk %}"> No portfolio </a></p>
    {% endif %}
    <a href="{% url 'student-update' student.pk %}">Update Student </a>
 {% endblock %}

@@ -1,7 +1,9 @@
+
+
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Portfolio, Project, Student
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 #render for homepage
 def intro(request):
@@ -20,6 +22,7 @@ def index(request):
    )
 
 
+
 class StudentListView(ListView):
     model = Student
     template_name = 'portfolio_app/student_list.html'
@@ -33,8 +36,15 @@ class StudentDetailView(DetailView):
 class StudentCreateView(CreateView):
     model = Student
     fields = ['name', 'email', 'major']
-    template_name = 'portfolio_app/student_form.html'
-    success_url = reverse_lazy('portfolio-create')
+    template_name = 'portfolio_app/student_form.html' 
+
+    def form_valid(self, form):
+        student = form.save()
+        self.pk = student.pk
+        return super().form_valid(form)
+
+    def get_success_url(self) :
+        return reverse('student_detail', kwargs={'pk': self.pk})
 
 class StudentUpdateView(UpdateView):
     model = Student
@@ -53,16 +63,22 @@ class PortfolioDetailView(DetailView):
     context_object_name = 'current_portfolio'
     queryset = Portfolio.objects.all()
    
-
 class PortfolioCreateView(CreateView):
     model = Portfolio
     fields = ['title','contact_email','about']
     template_name = 'portfolio_app/portfolio_form.html'
     success_url = reverse_lazy('index')
+    
   
+   
     def form_valid(self, form):
-        form.instance.student = Student.objects.latest("pk")
-        return super().form_valid(form)
+        form.instance.student = Student.objects.get("pk")
+        portfolio = form.save()
+        self.pk = portfolio.pk
+        return super(PortfolioCreateView,self).form_valid(form)
 
+    # def get_success_url(self) :
+    #     return reverse('portfolio_desc', kwargs={'pk': self.pk})       
 
+# class PortfolioUpdateView(Upd)
     
