@@ -9,6 +9,7 @@ urlpatterns = [
     path('index/', views.index, name='index'),#list
     path('portfolio/<int:pk>/', views.PortfolioDetailView.as_view(), name='portfolio_desc'),#single desc
     path('portfolio/create/<int:pk>/', views.PortfolioCreateView.as_view(), name ='portfolio-create'),#creation
+    path('portfolio/update/<int:pk>/', views.PortfolioUpdateView.as_view(), name='portfolio-update'),
 
 #student paths \/
     path('students/', views.StudentListView.as_view(), name='student_list'),#list

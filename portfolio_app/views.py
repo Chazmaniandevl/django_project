@@ -1,5 +1,6 @@
 
 
+from django.http import request
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Portfolio, Project, Student
@@ -54,6 +55,7 @@ class StudentUpdateView(UpdateView):
 
 class StudentDeleteView(DeleteView):
     model = Student
+    template_name_suffix = '_confirm_delete.html'
     success_url = reverse_lazy('student_list')
 
 
@@ -72,13 +74,29 @@ class PortfolioCreateView(CreateView):
   
    
     def form_valid(self, form):
-        form.instance.student = Student.objects.get("pk")
+        
+        form.instance.student = Student.objects.get(pk = self.kwargs.get('pk'))
         portfolio = form.save()
         self.pk = portfolio.pk
         return super(PortfolioCreateView,self).form_valid(form)
 
-    # def get_success_url(self) :
-    #     return reverse('portfolio_desc', kwargs={'pk': self.pk})       
+    def get_success_url(self) :
+        return reverse('portfolio_desc', kwargs={'pk': self.pk})       
 
-# class PortfolioUpdateView(Upd)
-    
+class PortfolioUpdateView(UpdateView):
+    model = Portfolio
+    fields = ['title','contact_email','about']
+    template_name_suffix = "_update_form"
+
+    def form_valid(self,form):
+     portfolio = form.save()
+     self.pk = portfolio.pk
+     return super(PortfolioUpdateView,self).form_valid(form)
+
+    def get_success_url(self) :
+            return reverse('portfolio_desc', kwargs={'pk': self.pk})
+
+class PortfolioDeleteView(DeleteView):
+    model = Portfolio
+    template_name_suffix = "_confirm_delete.html"
+    success_url = reverse_lazy('student_list')

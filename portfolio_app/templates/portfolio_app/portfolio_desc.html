@@ -17,6 +17,7 @@
     {% empty %}
         <li>No Projects Found</li>
     {% endfor %}
+    <li> create new project?</li>
 </ul>
-    <!-- Make projects here soon-->
+    <a href="{% url 'portfolio-update' current_portfolio.pk %}"> update</a>
 {% endblock %}
