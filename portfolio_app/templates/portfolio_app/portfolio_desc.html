@@ -12,12 +12,13 @@
     <ul>
    
     {% for project in current_portfolio.project_set.all %}
-        <li><p>{{project}} : {{project.description}}</p></li>
+        <li><p><a href = "{% url 'project-detail' project.pk %}"> {{project}} </a></p></li>
         
     {% empty %}
         <li>No Projects Found</li>
     {% endfor %}
-    <li> create new project?</li>
+    <li> <a href="{% url 'project-create' current_portfolio.pk %}"> create new project? </a></li>
 </ul>
-    <a href="{% url 'portfolio-update' current_portfolio.pk %}"> update</a>
+   <p> <a href="{% url 'portfolio-update' current_portfolio.pk %}"> update</a></p>
+   <p> <a href="{% url 'portfolio-delete' current_portfolio.pk %}">Delete portfolio</a></p>
 {% endblock %}

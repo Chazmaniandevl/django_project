@@ -48,6 +48,6 @@ class Project(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return "/portfolio/%d/" % self.portfolio.id
+        return "/project/%d/" % self.id
 
 

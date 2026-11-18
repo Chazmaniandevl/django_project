@@ -55,7 +55,7 @@ class StudentUpdateView(UpdateView):
 
 class StudentDeleteView(DeleteView):
     model = Student
-    template_name_suffix = '_confirm_delete.html'
+    template_name_suffix = '_confirm_delete'
     success_url = reverse_lazy('student_list')
 
 
@@ -98,5 +98,27 @@ class PortfolioUpdateView(UpdateView):
 
 class PortfolioDeleteView(DeleteView):
     model = Portfolio
-    template_name_suffix = "_confirm_delete.html"
+    template_name_suffix = "_confirm_delete"
     success_url = reverse_lazy('student_list')
+
+
+class ProjectDetailView(DetailView):
+    model = Project
+    template_name_suffix = '_detail'
+    context_object_name = 'project'
+
+class ProjectCreateView(CreateView):
+    model = Project
+    fields = ['title','description']
+    template_name = 'portfolio_app/project_form.html'
+    success_url = reverse_lazy('student_list')
+    
+    def form_valid(self, form):
+        
+        form.instance.portfolio = Portfolio.objects.get(pk = self.kwargs.get('pk'))
+        project = form.save()
+        self.pk = project.pk
+        return super(ProjectCreateView,self).form_valid(form)
+
+    def get_success_url(self) :
+        return reverse('project_desc', kwargs={'pk': self.pk})
