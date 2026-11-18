@@ -109,7 +109,7 @@ class ProjectDetailView(DetailView):
 
 class ProjectCreateView(CreateView):
     model = Project
-    fields = ['title','description']
+    fields = ['title','description','website']
     template_name = 'portfolio_app/project_form.html'
     success_url = reverse_lazy('student_list')
     
@@ -125,7 +125,7 @@ class ProjectCreateView(CreateView):
 
 class ProjectUpdateView(UpdateView):
     model = Project
-    fields = ['title','description']
+    fields = ['title','description','website']
     template_name_suffix = '_update_form'
 
 class ProjectDeleteView(DeleteView):

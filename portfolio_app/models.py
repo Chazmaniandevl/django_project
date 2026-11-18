@@ -42,6 +42,7 @@ class Project(models.Model):
     portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=False)
+    website = models.URLField(null=False)
    
 
     def __str__(self):
