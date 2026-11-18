@@ -22,6 +22,8 @@ urlpatterns = [
 #project paths \/
     path('project/<int:pk>/', views.ProjectDetailView.as_view(), name='project-detail'),
     path('project/create/<int:pk>/', views.ProjectCreateView.as_view(), name='project-create'),
+    path('project/update/<int:pk>/', views.ProjectUpdateView.as_view(), name='project-update'),
+    path('project/delete/<int:pk>/', views.ProjectDeleteView.as_view(), name='project-delete'),
 
     
 ]
